@@ -8,18 +8,23 @@ Quem ofusca é uma **ferramenta pronta** (um "ofuscador"): passamos o código or
 
 ## Os benchmarks
 
-São **dois programas diferentes** (benchmark = programa feito pra medir desempenho, dá pra cronometrar e comparar). Escolhemos uma linguagem e testamos os dois nela.
+Linguagem: **Python**. São dois programas de tipos diferentes (benchmark = programa feito pra medir desempenho, dá pra cronometrar e comparar):
+
+- **`t4-multi-python.py` - multiplicação de matrizes.** Laço triplo `O(n³)`, pesado em cálculo (aritmética de ponto flutuante). O trecho cronometrado é a multiplicação.
+- **`t4-palavras.py` - contagem de palavras.** Conta ocorrências num dicionário, pesado em estrutura de dados / hashing. O trecho cronometrado é só o laço de contagem (`O(n)`, leve - a criação do corpus fica fora da medição).
+
+> Por isso os **tamanhos de entrada vão ser bem diferentes** entre os dois: a matriz atinge 20s com um `n` modesto; a contagem precisa de um `n` bem maior.
 
 ## O que vamos medir
 
-| Benchmark   | Versão                   | Medir?               |
-| ----------- | ------------------------ | -------------------- |
-| Benchmark A | Original (sem ofuscação) | ✅ linha de base de A |
-| Benchmark A | Ofuscado - config 1      | ✅                    |
-| Benchmark A | Ofuscado - config 2      | ✅                    |
-| Benchmark B | Original (sem ofuscação) | ✅ linha de base de B |
-| Benchmark B | Ofuscado - config 1      | ✅                    |
-| Benchmark B | Ofuscado - config 2      | ✅                    |
+| Benchmark        | Versão                   | Medir?                    |
+| ---------------- | ------------------------ | ------------------------- |
+| Matrizes (multi) | Original (sem ofuscação) | ✅ linha de base da matriz |
+| Matrizes (multi) | Ofuscado - config 1      | ✅                         |
+| Matrizes (multi) | Ofuscado - config 2      | ✅                         |
+| Palavras         | Original (sem ofuscação) | ✅ linha de base de palavras |
+| Palavras         | Ofuscado - config 1      | ✅                         |
+| Palavras         | Ofuscado - config 2      | ✅                         |
 
 Cada linha dessa tabela ainda se multiplica por **3 tamanhos de entrada × 10 repetições**.
 
