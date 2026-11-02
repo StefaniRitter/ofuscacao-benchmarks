@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# resultados brutos: descomentar para não usar os CSVs
+# results/*.csv

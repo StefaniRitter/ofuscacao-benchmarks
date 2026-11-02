@@ -1,0 +1,4 @@
+# Parte 1 (run.py) usa apenas a biblioteca padrao do Python -> nada a instalar.
+# A Parte 3 (analise/graficos) provavelmente vai querer:
+#   pandas
+#   matplotlib
