@@ -47,3 +47,65 @@ Por isso ambos se cruzam na tabela acima.
 - **10 repetições** por caso; reportar **média, mediana, desvio padrão, mínimo e máximo**.
 - Controlar a plataforma durante os testes: fechar outros programas, laptop na tomada, etc.
 - Automatizar com script (são muitas execuções).
+
+## Aplicação das técnicas de ofuscação
+
+### 1. Geração dos arquivos ofuscados
+Nesta etapa foi utilizada a ferramenta **Pyarmor** para aplicar as técnicas de ofuscação aos programas.
+
+### Configuração 1 - ofuscação de módulo e funções 
+Parâmetros utilizados: 
+*  --obf-module 1:  aplica ofuscação ao módulo
+* -obf-code 1: aplica ofuscação do código das funções
+
+Comando utilizado: 
+```
+python -m pyarmor.cli gen --obf-module 1 --obf-code 1 -O benchmarks/config1 benchmarks/original/t4-multi-python.py benchmarks/original/t4-palavras.py
+```
+<img src="image.png" width="450">
+
+### Configuração 2 - ofuscação de módulo e proteção de chamadas
+Inicialmente foram utilizados os parâmetros:
+
+* --mix-str: proteção de strings
+* --obf-code 2:  transformação de acessos a atributos
+
+Comando utilizado:
+```
+python -m pyarmor.cli gen --obf-module 1 --obf-code 2 --mix-str -O benchmarks/config2 benchmarks/original/t4-multi-python.py benchmarks/original/t4-palavras.py
+```
+<img src="image-1.png" width="450">
+
+Porém o recuso exige uma licença não disponível no ambiente utilizado. Por isso foi utilizada outra configuração com o parâmetro:
+*  --assert-call: adiciona verificações às chamadas de funções protegidas
+
+Comand utilizado: 
+```
+python -m pyarmor.cli gen --obf-module 1 --obf-code 1 --assert-call -O benchmarks/config2 benchmarks/original/t4-multi-python.py benchmarks/original/t4-palavras.py
+```
+<img src="image-2.png" width="450">
+
+
+## 2. Testes de funcionamento dos arquivos ofuscados
+
+### Multiplicação de matrizes
+```
+python benchmarks/config1/t4-multi-python.py 464
+```
+<img src="image-3.png" width="700">
+
+```
+python benchmarks/config2/t4-multi-python.py 464
+```
+<img src="image-4.png" width="700">
+
+## Contagem de palavras
+```
+python benchmarks/config1/t4-palavras.py
+```
+<img src="image-5.png" width="700">
+
+```
+python benchmarks/config2/t4-palavras.py
+```
+<img src="image-6.png" width="700">
